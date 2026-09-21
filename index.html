@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6bd19">
+  <meta name="description" content="毛角角原创IP互动展示：角色设定、表情、故事场景与周边延展。">
+  <title>毛角角｜互动式 IP 展示</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f6bd19'/%3E%3Cpath d='M27 19 32 6l5 13' fill='%23006dcc' stroke='%23161616' stroke-width='3'/%3E%3Ccircle cx='32' cy='30' r='12' fill='white' stroke='%23161616' stroke-width='4'/%3E%3Ccircle cx='32' cy='30' r='6' fill='%23006dcc'/%3E%3Ccircle cx='32' cy='30' r='3' fill='%23161616'/%3E%3Cpath d='M18 45q14 12 28 0' fill='none' stroke='%23ee4f79' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <a class="skip-link" href="#dna">跳至角色介绍</a>
+  <div class="progress" aria-hidden="true"><span></span></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="回到顶部"><span>毛角角</span><small>MAO JIAO JIAO</small></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="chapterNav">章节 ☰</button><nav id="chapterNav" aria-label="章节导航">
+      <a href="#dna">角色</a><a href="#moods">表情</a><a href="#world">世界</a><a href="#goods">周边</a>
+    </nav>
+    <button class="index-btn" type="button" data-open-index>20 屏总览 <span>↗</span></button>
+  </header>
+
+  <main id="top">
+    <section class="hero theme-dark" data-section="首页">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">MAO JIAO JIAO / ORIGINAL IP</p>
+        <h1>毛角角</h1>
+        <p class="hero-line">一点怪。<br>很多可爱。</p>
+        <a class="round-link" href="#dna"><span>认识毛角角</span><b>↘</b></a>
+      </div>
+      <figure class="hero-art" data-lightbox="assets/hero.webp" data-caption="毛角角 · 一点怪，很多可爱">
+        <img src="assets/hero.webp" alt="黑金灯光下张开双手微笑的毛角角" fetchpriority="high" width="1672" height="941">
+      </figure>
+      <div class="hero-stamp" aria-hidden="true"><span>01 / HELLO, WORLD</span><span>独眼 · 独角 · 无限好奇</span></div>
+    </section>
+
+    <div class="ticker" aria-hidden="true"><div>MAO JIAO JIAO · 一眼就认出我 · SOFT FUR · BIG SMILE · MAO JIAO JIAO · 一眼就认出我 · SOFT FUR · BIG SMILE ·</div></div>
+
+    <section class="chapter intro" id="dna" data-section="角色设定">
+      <div class="chapter-head reveal">
+        <p class="eyebrow">01 / CHARACTER DNA</p>
+        <h2>一眼，<br>就认出我。</h2>
+        <p>独眼、独角、粉色大嘴与柔软长毛，共同构成毛角角最鲜明的角色记忆。</p>
+      </div>
+      <div class="dna-grid">
+        <figure class="poster tall reveal" data-lightbox="assets/p02.webp" data-caption="角色介绍"><img src="assets/p02.webp" alt="毛角角角色介绍" loading="lazy" decoding="async" width="1122" height="1402"></figure>
+        <figure class="poster reveal" data-lightbox="assets/p03.webp" data-caption="色彩系统"><img src="assets/p03.webp" alt="毛角角色彩系统" loading="lazy" decoding="async" width="1122" height="1402"></figure>
+        <figure class="poster reveal" data-lightbox="assets/p04.webp" data-caption="标准三视图"><img src="assets/p04.webp" alt="毛角角标准三视图" loading="lazy" decoding="async" width="1122" height="1402"></figure>
+        <figure class="poster wide reveal" data-lightbox="assets/p05.webp" data-caption="毛发与材质细节"><img src="assets/p05.webp" alt="毛角角毛发细节" loading="lazy" decoding="async" width="1122" height="1402"></figure>
+      </div>
+    </section>
+
+    <section class="chapter mood-section" id="moods" data-section="表情动作">
+      <div class="chapter-head light reveal">
+        <p class="eyebrow">02 / EMOTION LAB</p>
+        <h2>今天，<br>什么心情？</h2>
+      </div>
+      <div class="mood-console reveal" data-mood="happy">
+        <div class="mood-art">
+          <img id="moodImage" src="assets/mood1.webp" alt="毛角角：开心" loading="lazy" decoding="async" width="1400" height="1400">
+          <span class="mood-number" aria-hidden="true">01 / 09</span>
+          <p class="image-status" id="moodStatus" role="status"></p>
+          <span class="mood-word" id="moodWord">开心</span>
+        </div>
+        <div class="mood-controls" role="group" aria-label="选择毛角角心情">
+          <div><strong id="moodTitle">开心</strong><p id="moodCopy">把快乐张开，让绒毛一起跳起来。</p></div>
+          <div class="mood-buttons" id="moodButtons"></div>
+          <button class="detail-link" data-lightbox="assets/p07.webp" data-caption="毛角角 · 九种表情">查看完整九宫格 ↗</button>
+        </div>
+      </div>
+      <div class="motion-pair">
+        <figure class="poster reveal" data-lightbox="assets/p06.webp" data-caption="开心动作"><img src="assets/p06.webp" alt="毛角角开心动作" loading="lazy" decoding="async" width="1122" height="1402"></figure>
+        <figure class="poster reveal" data-lightbox="assets/p08.webp" data-caption="抱抱动作"><img src="assets/p08.webp" alt="毛角角抱抱动作" loading="lazy" decoding="async" width="1122" height="1402"></figure>
+      </div>
+    </section>
+
+    <section class="chapter world-section" id="world" data-section="故事世界">
+      <div class="world-head reveal"><div><p class="eyebrow">03 / LITTLE WORLD</p><h2>把好奇，<br>交给世界。</h2></div><div class="carousel-nav"><button data-prev aria-label="上一张">←</button><span><b id="sceneNo">01</b> / 04</span><button data-next aria-label="下一张">→</button></div></div>
+      <div class="scene-track" id="sceneTrack" tabindex="0" aria-label="毛角角故事场景轮播">
+        <figure class="scene active" data-title="快乐，有点甜。" data-lightbox="assets/p09.webp" data-caption="甜品世界"><img src="assets/p09.webp" alt="毛角角甜品场景" loading="lazy" decoding="async" width="1122" height="1402"><figcaption><span>01</span>甜品世界</figcaption></figure>
+        <figure class="scene" data-title="去海边，撒个欢。" data-lightbox="assets/p10.webp" data-caption="海边假日"><img src="assets/p10.webp" alt="毛角角海边场景" loading="lazy" decoding="async" width="1122" height="1402"><figcaption><span>02</span>海边假日</figcaption></figure>
+        <figure class="scene" data-title="好奇，正在发芽。" data-lightbox="assets/p11.webp" data-caption="森林探索"><img src="assets/p11.webp" alt="毛角角森林场景" loading="lazy" decoding="async" width="1122" height="1402"><figcaption><span>03</span>森林探索</figcaption></figure>
+        <figure class="scene" data-title="把好奇，交给星空。" data-lightbox="assets/p12.webp" data-caption="星空观察"><img src="assets/p12.webp" alt="毛角角星空场景" loading="lazy" decoding="async" width="1122" height="1402"><figcaption><span>04</span>星空观察</figcaption></figure>
+      </div>
+      <p class="scene-title" id="sceneTitle">快乐，有点甜。</p>
+    </section>
+
+    <section class="chapter goods-section" id="goods" data-section="周边延展">
+      <div class="goods-head reveal"><div><p class="eyebrow">04 / EVERYDAY OBJECTS</p><h2>偷偷陪你，<br>走进日常。</h2></div><div class="filters" role="group" aria-label="筛选周边"><button class="active" data-filter="all">全部</button><button data-filter="wear">穿戴</button><button data-filter="carry">出行</button><button data-filter="life">生活</button></div></div>
+      <div class="goods-grid">
+        <figure class="product hero-product reveal" data-cat="carry wear" data-lightbox="assets/p13.webp" data-caption="帆布包与鸭舌帽"><img src="assets/p13.webp" alt="毛角角帆布包与鸭舌帽" loading="lazy" decoding="async" width="1122" height="1402"><figcaption>帆布包 · 鸭舌帽 <span>01</span></figcaption></figure>
+        <figure class="product reveal" data-cat="carry" data-lightbox="assets/p14.webp" data-caption="日常书包"><img src="assets/p14.webp" alt="毛角角书包" loading="lazy" decoding="async" width="1122" height="1402"><figcaption>日常书包 <span>02</span></figcaption></figure>
+        <figure class="product reveal" data-cat="wear" data-lightbox="assets/p15.webp" data-caption="T恤"><img src="assets/p15.webp" alt="毛角角T恤" loading="lazy" decoding="async" width="1122" height="1402"><figcaption>T 恤 <span>03</span></figcaption></figure>
+        <figure class="product reveal" data-cat="life" data-lightbox="assets/p16.webp" data-caption="数码配件"><img src="assets/p16.webp" alt="毛角角数码产品" loading="lazy" decoding="async" width="1122" height="1402"><figcaption>数码配件 <span>04</span></figcaption></figure>
+        <figure class="product reveal" data-cat="life" data-lightbox="assets/p17.webp" data-caption="保温杯"><img src="assets/p17.webp" alt="毛角角保温杯" loading="lazy" decoding="async" width="1122" height="1402"><figcaption>保温杯 <span>05</span></figcaption></figure>
+        <figure class="product reveal" data-cat="life" data-lightbox="assets/p18.webp" data-caption="居家陪伴"><img src="assets/p18.webp" alt="毛角角居家产品" loading="lazy" decoding="async" width="1122" height="1402"><figcaption>居家陪伴 <span>06</span></figcaption></figure>
+      </div>
+    </section>
+
+    <section class="wardrobe theme-ivory" data-section="造型延展">
+      <div class="wardrobe-copy reveal"><p class="eyebrow">05 / CHARACTER WARDROBE</p><h2>换个造型，<br>继续好奇。</h2><p>小小厨师、冒险出发、星空奇想。造型改变，毛角角的角色 DNA 始终清晰。</p><button class="detail-link dark" data-lightbox="assets/p19.webp" data-caption="毛角角 · 角色服装延展">放大查看 ↗</button></div>
+      <figure class="wardrobe-art reveal" data-lightbox="assets/p19.webp" data-caption="毛角角 · 角色服装延展"><img src="assets/p19.webp" alt="毛角角三种服装延展" loading="lazy" decoding="async" width="1122" height="1402"></figure>
+    </section>
+
+    <section class="closing theme-dark" data-section="结束">
+      <figure><img src="assets/p20.webp" alt="毛角角结束页" loading="lazy" decoding="async" width="1122" height="1402"></figure>
+      <div class="closing-copy"><p class="eyebrow">CHARACTER · EMOTION · EVERYDAY</p><h2>下次见，<br>还要开心。</h2><a href="#top">回到顶部 ↑</a></div>
+    </section>
+  </main>
+
+  <aside class="section-label" aria-hidden="true"><span>01</span><b id="sectionName">首页</b></aside>
+
+  <dialog class="lightbox" id="lightbox" aria-label="作品查看器">
+    <button class="close" aria-label="关闭">×</button><div class="viewer-stage"><img alt="" draggable="false"><span id="viewerStatus" role="status"></span></div><p aria-live="polite"></p><div class="viewer-tools"><button data-view="prev" aria-label="上一幅">←</button><button data-view="minus" aria-label="缩小">−</button><button data-view="reset" aria-label="恢复适合窗口">适合</button><button data-view="plus" aria-label="放大">＋</button><button data-view="next" aria-label="下一幅">→</button><a id="originalLink" target="_blank" rel="noopener">原图 ↗</a></div>
+  </dialog>
+  <dialog class="index-panel" id="indexPanel" aria-label="全部作品索引">
+    <div class="index-top"><div><p class="eyebrow">ALL SCREENS</p><h2>20 屏视觉索引</h2></div><button class="close" aria-label="关闭">×</button></div>
+    <div class="index-grid" id="indexGrid"></div>
+  </dialog>
+  <script src="site.js"></script>
+</body>
+</html>
