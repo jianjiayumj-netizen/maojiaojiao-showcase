@@ -45,4 +45,6 @@ dialog::backdrop{background:#020b1be8}#viewerStatus{background:#07182be8}
 /* Align the title caption and remove all hero text shadows. */
 .gaze-editorial,.gaze-editorial *{text-shadow:none!important}
 .kv-descriptor{margin-left:0;text-align:left}
+.hero-ripple{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;z-index:1}
+.gaze-editorial{z-index:2}
 
