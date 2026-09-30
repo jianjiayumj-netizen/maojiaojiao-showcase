@@ -48,3 +48,6 @@ dialog::backdrop{background:#020b1be8}#viewerStatus{background:#07182be8}
 .hero-ripple{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;z-index:1}
 .gaze-editorial{z-index:2}
 
+
+/* Match the requested RippleDistortion grayscale base even while idle. */
+.gaze-hero video{filter:grayscale(1)}
