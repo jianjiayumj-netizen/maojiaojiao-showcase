@@ -17,17 +17,6 @@ nav.addEventListener('focusout',e=>{if(!nav.contains(e.relatedTarget)&&e.related
 matchMedia('(min-width:801px)').addEventListener('change',()=>closeMenu());
 const sectionObserver=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){$$('a',nav).forEach(a=>{if(a.hash==='#'+e.target.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')})}}),{rootMargin:'-20% 0px -60%'});$$('main section[id]').forEach(e=>sectionObserver.observe(e));
 
-const moodNames=['开心','生气','震惊','委屈','贪吃','害羞','卖萌','吓唬人','求抱抱'];
-const moodCopy=['把快乐张开，让绒毛一起跳起来。','气鼓鼓，也毛茸茸。','哇，发生了什么？','想要一点安慰。','发现好吃的啦。','有一点点害羞。','挥挥手，看看我。','张牙舞爪的小怪兽。','靠近一点，抱抱你。'];
-let moodRequest=0;
-function selectMood(i){
- const request=++moodRequest,status=$('#moodStatus'),img=$('#moodImage');status.textContent='正在准备表情…';$('.mood-art').setAttribute('aria-busy','true');
- const next=new Image();next.onload=()=>{if(request!==moodRequest)return;img.src=next.src;img.alt='毛角角：'+moodNames[i];$('#moodTitle').textContent=moodNames[i];$('#moodCopy').textContent=moodCopy[i];$('.mood-number').textContent=pad(i+1)+' / 09';status.textContent='';$('.mood-art').setAttribute('aria-busy','false');$$('#moodButtons button').forEach((b,n)=>{b.classList.toggle('active',n===i);b.setAttribute('aria-pressed',String(n===i))});if(!reduced.matches)img.animate([{opacity:.5,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:250})};
- next.onerror=()=>{if(request!==moodRequest)return;status.textContent='表情加载失败，请再次选择重试。';$('.mood-art').setAttribute('aria-busy','false')};next.src=`assets/mood${i+1}.webp`;
-}
-moodNames.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.textContent=name;b.setAttribute('aria-pressed',String(i===0));b.classList.toggle('active',i===0);b.onclick=()=>selectMood(i);$('#moodButtons').append(b)});$('#moodTitle').setAttribute('aria-live','polite');
-$('#moodImage').addEventListener('error',()=>{$('#moodStatus').textContent='表情加载失败，请再次选择重试。'});
-
 const track=$('#sceneTrack'),scenes=$$('.scene',track);let sceneIndex=0,timer;
 function setScene(n,scroll=true){sceneIndex=(n+scenes.length)%scenes.length;scenes.forEach((s,i)=>s.classList.toggle('active',i===sceneIndex));$('#sceneNo').textContent=pad(sceneIndex+1);$('#sceneTitle').textContent=scenes[sceneIndex].dataset.title;if(scroll)track.scrollTo({left:scenes[sceneIndex].offsetLeft,behavior:reduced.matches?'instant':'smooth'})}
 $('[data-prev]').onclick=()=>setScene(sceneIndex-1);$('[data-next]').onclick=()=>setScene(sceneIndex+1);

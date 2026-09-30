@@ -8,6 +8,8 @@
   <title>毛角角｜互动式 IP 展示</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f6bd19'/%3E%3Cpath d='M27 19 32 6l5 13' fill='%23006dcc' stroke='%23161616' stroke-width='3'/%3E%3Ccircle cx='32' cy='30' r='12' fill='white' stroke='%23161616' stroke-width='4'/%3E%3Ccircle cx='32' cy='30' r='6' fill='%23006dcc'/%3E%3Ccircle cx='32' cy='30' r='3' fill='%23161616'/%3E%3Cpath d='M18 45q14 12 28 0' fill='none' stroke='%23ee4f79' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="moods.css?v=20260930">
+  <link rel="stylesheet" href="gaze.css?v=20260930">
 </head>
 <body>
   <a class="skip-link" href="#dna">跳至角色介绍</a>
@@ -21,17 +23,10 @@
   </header>
 
   <main id="top">
-    <section class="hero theme-dark" data-section="首页">
-      <div class="hero-copy reveal">
-        <p class="eyebrow">MAO JIAO JIAO / ORIGINAL IP</p>
-        <h1>毛角角</h1>
-        <p class="hero-line">一点怪。<br>很多可爱。</p>
-        <a class="round-link" href="#dna"><span>认识毛角角</span><b>↘</b></a>
-      </div>
-      <figure class="hero-art" data-lightbox="assets/hero.webp" data-caption="毛角角 · 一点怪，很多可爱">
-        <img src="assets/hero.webp" alt="黑金灯光下张开双手微笑的毛角角" fetchpriority="high" width="1672" height="941">
-      </figure>
-      <div class="hero-stamp" aria-hidden="true"><span>01 / HELLO, WORLD</span><span>独眼 · 独角 · 无限好奇</span></div>
+    <section class="gaze-hero" data-section="首页" aria-label="毛角角互动主视觉">
+      <video id="gazeVideo" muted playsinline preload="auto" poster="assets/gaze-poster.jpg" width="1920" height="1080" aria-label="毛角角随指针左右转头" tabindex="0"><source src="assets/gaze-20260930.mp4" type="video/mp4"></video>
+      <div class="gaze-editorial" aria-hidden="true"><p class="gaze-note">ONE EYE.<br>ENDLESS CURIOSITY.</p><div class="gaze-title"><span>STAY</span><span>CURIOUS.</span></div><p class="gaze-side">一点怪。<br>很多可爱。</p><p class="gaze-signature">MAO JIAO JIAO / 毛角角</p></div>
+      <h1 class="sr-only">毛角角 · 一点怪，很多可爱</h1>
     </section>
 
     <div class="ticker" aria-hidden="true"><div>MAO JIAO JIAO · 一眼就认出我 · SOFT FUR · BIG SMILE · MAO JIAO JIAO · 一眼就认出我 · SOFT FUR · BIG SMILE ·</div></div>
@@ -54,18 +49,21 @@
       <div class="chapter-head light reveal">
         <p class="eyebrow">02 / EMOTION LAB</p>
         <h2>今天，<br>什么心情？</h2>
+        <p class="mood-intro">开心就笑，委屈就抱抱。<br>九种小情绪，每一种都很毛角角。</p>
       </div>
       <div class="mood-console reveal" data-mood="happy">
         <div class="mood-art">
-          <img id="moodImage" src="assets/mood1.webp" alt="毛角角：开心" loading="lazy" decoding="async" width="1400" height="1400">
+          <img id="moodImage" src="assets/mood-posters/01.webp" alt="毛角角开心大笑，张开双手" loading="lazy" decoding="async" width="1254" height="1254">
           <span class="mood-number" aria-hidden="true">01 / 09</span>
           <p class="image-status" id="moodStatus" role="status"></p>
-          <span class="mood-word" id="moodWord">开心</span>
+          <div class="mood-poster-caption"><span id="moodEnglish">HAPPY LITTLE MONSTER</span><strong class="mood-word" id="moodWord">快乐，藏不住。</strong></div>
+          <button class="mood-zoom" id="moodZoom" type="button" data-lightbox="assets/mood-posters/01.webp" data-caption="开心 · 快乐，藏不住。" aria-label="放大查看当前表情">放大 ↗</button>
         </div>
         <div class="mood-controls" role="group" aria-label="选择毛角角心情">
-          <div><strong id="moodTitle">开心</strong><p id="moodCopy">把快乐张开，让绒毛一起跳起来。</p></div>
+          <div class="mood-story"><p class="mood-kicker">此刻心情 / <span id="moodTitle">开心</span></p><h3 id="moodHeadline">开心到<br>每根毛都起飞。</h3><p id="moodCopy">今天的快乐有点多，分你一大半。</p></div>
+          <p class="mood-picker-label">选一个心情，看看我的反应 <span>↓</span></p>
           <div class="mood-buttons" id="moodButtons"></div>
-          <button class="detail-link" data-lightbox="assets/p07.webp" data-caption="毛角角 · 九种表情">查看完整九宫格 ↗</button>
+          <div class="mood-actions"><a id="moodDownload" href="assets/mood-posters/01.webp" download="毛角角-开心.webp">收藏这份心情 ↓</a></div>
         </div>
       </div>
       <div class="motion-pair">
@@ -117,6 +115,8 @@
     <div class="index-top"><div><p class="eyebrow">ALL SCREENS</p><h2>20 屏视觉索引</h2></div><button class="close" aria-label="关闭">×</button></div>
     <div class="index-grid" id="indexGrid"></div>
   </dialog>
-  <script src="site.js"></script>
+  <script src="site.js?v=20260930"></script>
+  <script src="moods.js?v=20260930"></script>
+  <script src="gaze.js?v=20260930"></script>
 </body>
 </html>
