@@ -49,5 +49,5 @@ dialog::backdrop{background:#020b1be8}#viewerStatus{background:#07182be8}
 .gaze-editorial{z-index:2}
 
 
-/* Match the requested RippleDistortion grayscale base even while idle. */
-.gaze-hero video{filter:grayscale(1)}
+/* Preserve full-color video beneath the ripple. */
+.gaze-hero video{filter:none}

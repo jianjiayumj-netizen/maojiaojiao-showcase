@@ -1,6 +1,6 @@
 // brushSize=80, strength=.035, swirl=1.7, rings=2.75, spread=7.25, spacing=8
 // dispersion=1, glint=1.5, tint=#5e50ff, tintAmount=.4, highlight=#d98dff
-// grayscale=true, quality=medium (.7 displacement sampling), fade=3.
+// grayscale=false, quality=medium (.7 displacement sampling), fade=3.
 // trigger=hover (default): clickStrength=1.5 is inactive, as in the supplied component.
 // Video-backed adaptation of the supplied RippleDistortion wave/falloff idea.
 // Kept independent of React so the existing static showcase remains lightweight.
@@ -22,7 +22,7 @@
   float field(vec2 at){float amount=0.;for(int i=0;i<100;i++){vec4 w=waves[i];if(w.w<.002)continue;float r=length((at-w.xy)*size)/max(w.z,1.);if(r>1.)continue;float brush=(exp(-r*r*5.)-.006737947)/(1.-.006737947);brush*=.55+.45*cos(r*6.2831853*2.75);amount+=brush*w.w*w.w;}return clamp(amount,0.,1.);}
   void main(){float amount=field(uv);float theta=amount*1.7*6.2831853;vec2 push=vec2(sin(theta),cos(theta))*amount*.035;
    vec3 color; color.r=texture2D(frame,clamp(uv+push*1.25,vec2(.001),vec2(.999))).r;color.g=texture2D(frame,clamp(uv+push,vec2(.001),vec2(.999))).g;color.b=texture2D(frame,clamp(uv+push*.75,vec2(.001),vec2(.999))).b;
-   color=vec3(dot(color,vec3(.2126,.7152,.0722)));
+   // Preserve the original video colors.
    color=mix(color,color*vec3(.368627,.313725,1.)*1.9,clamp(amount*1.6,0.,1.)*.4);
    vec2 texel=1./(size*.7);float ex=field(uv+vec2(texel.x,0.))-field(uv-vec2(texel.x,0.));float ey=field(uv+vec2(0.,texel.y))-field(uv-vec2(0.,texel.y));vec3 normal=normalize(vec3(-ex*26.,-ey*26.,1.));vec3 light=normalize(vec3(-.35,.55,1.));float raw=pow(max(dot(normal,light),0.),22.);float flatSpec=pow(light.z,22.);color+=vec3(.85098,.55294,1.)*clamp((raw-flatSpec)/(1.-flatSpec),0.,1.)*1.5;
    gl_FragColor=vec4(color,1.);}`);
