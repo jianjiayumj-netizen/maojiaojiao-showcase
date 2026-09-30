@@ -13,13 +13,18 @@
  const gl=canvas.getContext('webgl',{alpha:false,antialias:false,depth:false,powerPreference:'low-power'});
  if(!gl)return;
  let program,texture,buffer,disposed=false,raf=0,dirty=true,lastPoint=null;
- const waves=[],count=100,packed=new Float32Array(count*4);
+ const waves=[],count=32;
+ const fieldCanvas=document.createElement('canvas'),ctx=fieldCanvas.getContext('2d');
+ const stamp=document.createElement('canvas');stamp.width=stamp.height=128;
+ const sc=stamp.getContext('2d'),pixels=sc.createImageData(128,128);
+ for(let y=0;y<128;y++)for(let x=0;x<128;x++){const r=Math.hypot((x-63.5)/64,(y-63.5)/64);const a=r>1?0:(Math.exp(-r*r*5)-Math.exp(-5))/(1-Math.exp(-5))*(.55+.45*Math.cos(r*Math.PI*2*2.75));const n=(y*128+x)*4;pixels.data[n]=pixels.data[n+1]=pixels.data[n+2]=255;pixels.data[n+3]=Math.round(a*255)}sc.putImageData(pixels,0,0);
+ let fieldTexture,lastDraw=0;
  function shader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('Ripple shader unavailable');return s}
  try{
   const vs=shader(gl.VERTEX_SHADER,'attribute vec2 p; varying vec2 uv; void main(){uv=(p+1.0)*0.5;gl_Position=vec4(p,0.,1.);}');
   const fs=shader(gl.FRAGMENT_SHADER,`precision mediump float;
-  varying vec2 uv;uniform sampler2D frame;uniform vec2 size;uniform vec4 waves[100];
-  float field(vec2 at){float amount=0.;for(int i=0;i<100;i++){vec4 w=waves[i];if(w.w<.002)continue;float r=length((at-w.xy)*size)/max(w.z,1.);if(r>1.)continue;float brush=(exp(-r*r*5.)-.006737947)/(1.-.006737947);brush*=.55+.45*cos(r*6.2831853*2.75);amount+=brush*w.w*w.w;}return clamp(amount,0.,1.);}
+  varying vec2 uv;uniform sampler2D frame;uniform vec2 size;uniform sampler2D displacement;
+  float field(vec2 at){return texture2D(displacement,at).r;}
   void main(){float amount=field(uv);float theta=amount*1.7*6.2831853;vec2 push=vec2(sin(theta),cos(theta))*amount*.035;
    vec3 color; color.r=texture2D(frame,clamp(uv+push*1.25,vec2(.001),vec2(.999))).r;color.g=texture2D(frame,clamp(uv+push,vec2(.001),vec2(.999))).g;color.b=texture2D(frame,clamp(uv+push*.75,vec2(.001),vec2(.999))).b;
    // Preserve the original video colors.
@@ -32,18 +37,25 @@
   const p=gl.getAttribLocation(program,'p');gl.enableVertexAttribArray(p);gl.vertexAttribPointer(p,2,gl.FLOAT,false,0,0);
   texture=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,texture);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
  }catch{canvas.remove();return}
- const sizeLoc=gl.getUniformLocation(program,'size'),waveLoc=gl.getUniformLocation(program,'waves[0]');
+ const sizeLoc=gl.getUniformLocation(program,'size');
+ gl.uniform1i(gl.getUniformLocation(program,'frame'),0);gl.uniform1i(gl.getUniformLocation(program,'displacement'),1);
+ fieldTexture=gl.createTexture();gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,fieldTexture);for(const p of [gl.TEXTURE_MIN_FILTER,gl.TEXTURE_MAG_FILTER])gl.texParameteri(gl.TEXTURE_2D,p,gl.LINEAR);for(const p of [gl.TEXTURE_WRAP_S,gl.TEXTURE_WRAP_T])gl.texParameteri(gl.TEXTURE_2D,p,gl.CLAMP_TO_EDGE);gl.activeTexture(gl.TEXTURE0);
  hero.insertBefore(canvas,hero.querySelector('.gaze-editorial'));
- function resize(){const r=hero.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);gl.viewport(0,0,canvas.width,canvas.height);gl.uniform2f(sizeLoc,r.width,r.height);dirty=true}
+ new IntersectionObserver(es=>{if(!es[0].isIntersecting)clear()}).observe(hero);
+ function resize(){const r=hero.getBoundingClientRect(),dpr=Math.min(1,1280/r.width);canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);fieldCanvas.width=Math.min(384,Math.round(r.width*.4));fieldCanvas.height=Math.round(fieldCanvas.width*r.height/r.width);gl.viewport(0,0,canvas.width,canvas.height);gl.uniform2f(sizeLoc,r.width,r.height);dirty=true}
  const observer=new ResizeObserver(resize);observer.observe(hero);resize();
  function clear(){cancelAnimationFrame(raf);raf=0;waves.length=0;lastPoint=null;canvas.style.opacity='0'}
  function draw(now){raf=0;if(disposed||document.hidden||reduced.matches){clear();return}
   while(waves.length&&now-waves[0].time>3000)waves.shift();
   if(!waves.length){clear();return}
-  packed.fill(0);waves.forEach((w,i)=>{const age=(now-w.time)/1000;const scale=1.5+(1.5*7.25-1.5)*(1-Math.exp(-age*1.09));packed.set([w.x,w.y,scale*80/2,Math.exp(-age*Math.log(500)/3)],i*4)});
+  if(now-lastDraw<33){raf=requestAnimationFrame(draw);return}lastDraw=now;
+  ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;ctx.fillStyle='#000';ctx.fillRect(0,0,fieldCanvas.width,fieldCanvas.height);ctx.globalCompositeOperation='lighter';
+  const ratio=fieldCanvas.width/hero.clientWidth;
+  waves.forEach(w=>{const age=(now-w.time)/1000,scale=1.5+(1.5*7.25-1.5)*(1-Math.exp(-age*1.09)),diameter=scale*80*ratio;ctx.globalAlpha=Math.exp(-age*Math.log(500)/3)**2;ctx.drawImage(stamp,w.x*fieldCanvas.width-diameter/2,(1-w.y)*fieldCanvas.height-diameter/2,diameter,diameter)});
+  gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,fieldTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,fieldCanvas);gl.activeTexture(gl.TEXTURE0);
   // Never play the video: copy only decoded frames supplied by the gaze scrubber.
   if(dirty&&video.readyState>=2){try{gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,video);dirty=false}catch{clear();return}}
-  if(video.readyState>=2&&!dirty){gl.uniform4fv(waveLoc,packed);gl.drawArrays(gl.TRIANGLES,0,6);canvas.style.opacity='1'}
+  if(video.readyState>=2&&!dirty){gl.drawArrays(gl.TRIANGLES,0,6);canvas.style.opacity='1'}
   raf=requestAnimationFrame(draw);
  }
  function move(e){if(disposed||reduced.matches||e.pointerType==='touch')return;const r=hero.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;if(x<0||y<0||x>r.width||y>r.height)return;
