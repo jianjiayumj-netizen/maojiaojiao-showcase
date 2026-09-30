@@ -9,3 +9,23 @@
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .mood-poster-caption{display:none}.mood-art{align-self:center}.mood-art .mood-number{position:static;display:inline-block;margin:12px 16px;background:none;border:0}.mood-art .mood-zoom{top:auto;bottom:10px}.mood-art img{max-height:none}.mood-buttons button img{object-fit:contain}.mood-art .image-status{bottom:60px}
 @media(max-width:800px){.gaze-hero{margin-top:68px}.gaze-title{font-size:8vw}.gaze-side{font-size:3vw}.gaze-note{font-size:1.6vw}.gaze-signature{font-size:1.3vw}}
+
+/* Deep navy surfaces echo the hero's blue studio backdrop. */
+:root{--navy-surface:linear-gradient(165deg,#030d20 0%,#071a36 58%,#0b2a51 100%)}
+.topbar{background:linear-gradient(100deg,#030d20f5,#0a2343f5);border-color:#9cbeee22}
+.mood-section,.world-section,.closing,dialog{background:var(--navy-surface)}
+.mood-console{background:linear-gradient(145deg,#06142b,#0c2546);border-color:#88b3e433}
+.mood-art{background:#081b35}
+.mood-buttons button{background:#102b4b;border-color:#84a9d044;color:#e1ebf8}
+.mood-buttons button:hover:not(.active){background:#1b416a;border-color:#7baddf;color:#fff}
+.mood-section .mood-intro,.mood-controls #moodCopy{color:#bdcde1!important}
+.mood-controls .mood-picker-label,.mood-actions .detail-link{color:#aec4df}
+.close,.viewer-tools button,.viewer-tools a,.index-grid button{background:#102947}
+dialog::backdrop{background:#020b1be8}#viewerStatus{background:#07182be8}
+.gaze-editorial{background:linear-gradient(0deg,#020d25b8 0%,transparent 29%);text-shadow:0 2px 16px #00112799}
+.gaze-note{top:7%;left:4%;font:500 clamp(11px,1.2vw,20px)/1.5 Arial,'Microsoft YaHei',sans-serif;letter-spacing:.08em}
+.gaze-note span{display:block;font-size:clamp(8px,.7vw,12px);letter-spacing:.16em;opacity:.72;margin-top:5px}
+.gaze-title{left:4%;bottom:10%;font:900 clamp(18px,3.7vw,72px)/1.13 Arial,'Microsoft YaHei','PingFang SC',sans-serif;letter-spacing:-.035em;color:#fff}
+.gaze-title span+span{margin-left:0;font-size:.75em;margin-top:.12em;letter-spacing:.02em}
+.gaze-signature{left:4%;right:auto;bottom:3.4%;font-size:clamp(9px,1vw,16px);letter-spacing:.1em;color:#d5e3f5}
+@media(max-width:800px){.topbar nav{background:linear-gradient(135deg,#061329,#0b284b)}.gaze-note{font-size:clamp(10px,1.7vw,14px);letter-spacing:0}.gaze-note span{display:none}.gaze-title{font-size:clamp(18px,3.7vw,32px)}.gaze-signature{font-size:clamp(8px,1.5vw,12px);letter-spacing:0}}
