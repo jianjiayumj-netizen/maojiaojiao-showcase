@@ -41,3 +41,8 @@ dialog::backdrop{background:#020b1be8}#viewerStatus{background:#07182be8}
 .kv-roman{position:absolute;right:4%;bottom:12%;font:900 4.8vw/.88 Impact,'Arial Narrow',sans-serif;letter-spacing:-.02em;text-align:right;color:#fff9ed}.kv-roman span{display:block;color:transparent;-webkit-text-stroke:1px #fff9ed}
 .kv-footer{position:absolute;bottom:3.1%;left:4%;right:4%;border-top:1px solid #d6e5fa66;padding-top:1vw;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:clamp(8px,.83vw,14px);letter-spacing:.04em;color:#dae4f3}.kv-footer>span:last-child{font:700 .65vw Arial;letter-spacing:.1em}.kv-footer b{margin-left:1.2vw;color:#f8cc45}
 @media(max-width:600px){.kv-meta{gap:5px;top:5%}.kv-meta p{font-size:9px}.kv-meta small{display:none}.kv-cross{font-size:18px}.kv-manifesto{font-size:5vw;top:16%}.kv-manifesto small{display:none}.kv-name{font-size:9.4vw;-webkit-text-stroke:.4px;text-shadow:1px 1px 0 #072753}.kv-descriptor{font-size:2.7vw;margin-top:2vw;margin-left:0}.kv-headline{bottom:15%}.kv-roman{bottom:17%;font-size:4.6vw}.kv-roman span{-webkit-text-stroke:.5px #fff9ed}.kv-footer{bottom:3%;padding-top:2vw;font-size:8px;letter-spacing:0}.kv-footer>span:last-child{display:none}}
+
+/* Align the title caption and remove all hero text shadows. */
+.gaze-editorial,.gaze-editorial *{text-shadow:none!important}
+.kv-descriptor{margin-left:0;text-align:left}
+
